@@ -1,0 +1,115 @@
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+% Math Packages
+\usepackage{float}
+\usepackage{amsmath, mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bbm}
+\usepackage{breqn}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{forest}
+\usepackage{tikz-qtree}
+\graphicspath{ {./images/} }
+\usepackage{hyperref}
+\usepackage[shortlabels]{enumitem}
+\usetikzlibrary{arrows,matrix,positioning}
+\usepackage[ruled,vlined]{algorithm2e}
+% References
+\usepackage[capitalize]{cleveref}
+ 
+% This code makes widecheck for Fourier transform. Usage: \widecheck{blah blach}
+\makeatletter
+\DeclareRobustCommand\widecheck[1]{{\mathpalette\@widecheck{#1}}}
+\def\@widecheck#1#2{%
+  \setbox\z@\hbox{\m@th$#1#2$}%
+  \setbox\tw@\hbox{\m@th$#1%
+    \widehat{%
+      \vrule\@width\z@\@height\ht\z@
+      \vrule\@height\z@\@width\wd\z@}$}%
+  \dp\tw@-\ht\z@
+  \@tempdima\ht\z@ \advance\@tempdima2\ht\tw@ \divide\@tempdima\thr@@
+  \setbox\tw@\hbox{%
+    \raise\@tempdima\hbox{\scalebox{1}[-1]{\lower\@tempdima\box
+        \tw@}}}%
+  {\ooalign{\box\tw@ \cr \box\z@}}}
+\makeatother
+
+% Colorful Notes
+\usepackage{color}
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{Purple}{rgb}{.5,0,.5}
+\def\red{\color{Red}}
+\def\blue{\color{Blue}}
+\def\gray{\color{gray}}
+\def\purple{\color{Purple}}
+
+\newcommand{\rnote}[1]{{\red [#1] }} % \rnote{foo} then 'foo' is red
+\newcommand{\bnote}[1]{{\blue #1}} % \bnote{foo} then 'foo' is blue
+\newcommand{\gnote}[1]{{\gray [#1]}} % gray note  -- for comments
+\newcommand{\pnote}[1]{{\purple [#1]}} % green note  -- for comments
+
+% Math Environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\newtheorem{prop}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{example}{Example} 
+\newtheorem{question}{Question}
+\newtheorem{claim}{Claim} 
+\newtheorem{conjecture}{Conjecture} 
+
+% Custom Math Commands
+\newcommand{\vt}{\vskip 5mm} % vertical space
+\newcommand{\fl}{\noindent\textbf} % first line
+\newcommand{\Fl}{\vt\noindent\textbf} % first line with space above
+\def\R{\mathbb{R}} % Real numbers
+\def\Z{\mathbb{Z}} % Integers
+\def\E{\mathbb{E}} % Expectation
+\def\P{\mathbb{P}} % Probability
+\def\Q{\mathbb{Q}} % Q probability
+\newcommand{\indep}{\perp \!\!\! \perp}  %independence symbol
+\newcommand{\ifelse}[4]{\left\{ \begin{array}{l@{\quad:\quad}l}#1&#3\\#2&#4\end{array}\right.}
+\newcommand{\curly}[2]{\left\{ \begin{array}{l@{\quad}l}#1\\#2\end{array}\right.}
+\newcommand{\di}{\left. \mathrm{Di} \right|}
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage[shortlabels]{enumitem}
+\newtheorem{problem}{Problem}
+
+% Concise Vector Macro: write bracket vectors of arbitrary length
+% Usage: \columnvector{x,y,1} or \columnvector{2,x^2}
+\usepackage{stackengine}
+\newcommand\columnvector[1]{\setstackEOL{,}\bracketVectorstack{#1}}
+
+
+\title{Lecture Notes for Mihaela Ifrim's Course on Dispersive PDE}
+\date{Fall 2022}
+
+
+\begin{document}
+\title{Stochastic PDE}
+\author{Max Hill}
+\maketitle
+\tableofcontents
+\newpage
+\section{2023-01-25: Lecture}
+hi
+\end{document}
+
+
+
+\bibliographystyle{siam.bst}
+\bibliography{bibliography}
