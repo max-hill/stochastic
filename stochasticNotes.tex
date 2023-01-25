@@ -106,10 +106,97 @@
 \tableofcontents
 \newpage
 \section{2023-01-25: Lecture}
-hi
+
+Some examples of PDEs are
+\begin{itemize}
+  \item Laplace equation $\Delta u = 0$ (``elliptic'')
+  \item Heat Equation (heat conduction) $\partial_{t}u = \Delta u $
+  \item Transport Equation $\partial_{t}u + \partial_{x}u = 0$ (first order
+  linear)
+  \item Shrodinger Equation $i \partial_{t}u + \Delta u = 0$
+  \item Wave Propagation $\delta_{t}^{2}u = \Delta u$ (``hyperbolic'')
+  \item Maxwell Equation  
+  \item Burger's Equation $\partial_{t}u = u\partial_{x}u +\Delta u $
+  \item Navier-Stokes
+  $\delta_{t}u = \Delta u - u \cdot Du + \nabla p , \quad \mathrm{div}\ u =0$
+  where $u = (u_{1},\ldots,u_{n})$. 
+ \item KDV Equation  $u_{t}+6uu_{x}+\partial_{x}^{3}u=0 $
+ \item Hamilton-Jacobi (Classical mechanics/optimization)
+ $\partial_{t}u=\Delta u+F(Du) $
+\end{itemize}
+PDEs offer a way to model the real world. But in the real world, we might have
+some randomness, such as random stirring, random energy, thermal fluctuation,
+quantum fluctuation, etc. For example, we can consider the following
+modification of the heat equation:
+\begin{equation*}
+  \partial_{t}u = \Delta u +\xi(t,x)
+\end{equation*}
+where $\xi$ is a white noise, which we will define precisely later, but here
+just note it is Gaussian and is defined by the following covariance property:
+\begin{equation}
+  \label{eq:1}
+  \E\left[\xi(t,x)\xi(t',x') \right] = \delta(t-t')\delta(x-x')
+\end{equation}
+where $\delta$ is the Dirac delta function. The delta function is a generalized
+function, i.e. an element in the dual of the smooth functions. \cref{eq:1} says
+that the noise at different times is independent. White noise is important
+because we often are interested in the case where the noise is small scales. One
+drawback is that white noise is a generalized function, and consequently the
+solutions to stochastic PDEs are often generalized functions as well (sometimes
+called ``weak solutions'') which means the solutions may not be defined
+pointwise. This is okay with linear PDEs but introduces serious well-posedness
+questions for nonlinear PDEs (e.g., what does a nonlinear term like
+$u_{i}\partial_{x}u$ mean if $u$ is not defined pointwise?).
+
+To summarize,
+\begin{align*}
+  &\text{one variable}\rightarrow \text{ODE}\rightarrow \text{SDE}\\
+  &\text{multivariate}\rightarrow \text{PDE}\rightarrow \text{SPDE} 
+\end{align*}
+
+Main applications for SPDE are
+\begin{itemize}
+  \item Macroscopic limits of microscopic models (e.g. models from statistical
+  physics). 
+  \item Quantum Field Theory QFT
+\end{itemize}
+
+One example of the former application is the Ising model. This is about magnets.
+Consider a magnet $N|S$ which has a north and south end, and thus generates an
+electromagnetic field. If you heat up the north end, the field will decrease.
+This continues until a critical temperature $T_{c}$ (the ``Curie temperature'')
+is reached, at which point the field disappears completely. What is going on?
+Inside the magnet, the particles are like little magnets. At low temperatures,
+they are all pointing more or less the same way, like arrows. At high
+temperatures, the directions of the little magnets are random, like arrows all
+pointing in random directions, and they cancel each other out.
+
+Consideration of the ``little magnets'' is the microscopic behavior. One thing
+we can do is send $T \to T_{c}$ while zooming out at the same time in order to
+characterize the macroscopic behavior. This gives the following equation:
+\begin{equation*}
+  \partial_{t}\Phi = \Delta \Phi - \Phi^{3}+ \Phi
+\end{equation*}
+
+
+Another example, of the latter application (QFT), is the following. It involves
+a ``measure'' on the space of functions/fields
+\begin{equation*}
+  \left\{\Phi \text{ on } \R^d \right\}
+\end{equation*}
+such as
+\begin{equation*}
+  e^{-\int_{\R^d }|\Delta \Phi(x)|^{2}dx }
+\end{equation*}
+Gaussian Free Field (particles don't interact). Another example, in which
+particles do interact, is the ``$\Phi^{4}$ equation'' which is given by 
+\begin{equation*}
+  e^{-\int_{\R^d }|\Delta \Phi(x)|^{2} +\Phi^{4}dx }
+\end{equation*}
+
+
+Next time we will introduce white noise and how to deal with linear equations.
 \end{document}
-
-
 
 \bibliographystyle{siam.bst}
 \bibliography{bibliography}
