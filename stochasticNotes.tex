@@ -196,6 +196,148 @@ particles do interact, is the ``$\Phi^{4}$ equation'' which is given by
 
 
 Next time we will introduce white noise and how to deal with linear equations.
+\section{2023-02-01: Lecture Notes}
+First, review the Fourier Transform:
+\begin{equation*}
+  u(x) = \int_{\R^d } \hat{u}(k)e^{i \left\langle k,x \right\rangle} dk
+\end{equation*}
+and on the torus $T^{d}$, we have
+\begin{equation*}
+  u(x) = \sum_{z\in \Z^{d}} u_{k}e^{i \left\langle k,x \right\rangle}
+\end{equation*}
+If $u$ is real valued, then $\hat{u}_{k}=u_{-k}$. Another useful fact is the
+Parseval identity which says that
+\begin{equation*}
+  \int u^{2}(x)dx =  
+  \int \hat{u}^{2}(k)dk
+\end{equation*}
+and the RHS is $\sum_{z\in \Z^{d}}u_{k}^{2}$ if $u$ is defined on the Torus.
+
+Last time, we discussed the equation
+\begin{equation*}
+  \left\{ \begin{array}{l@{\quad}l} \partial_{t}u =\Delta u+\xi \\
+    u|_{t=0}=u_{0}\end{array}\right.
+\end{equation*}
+and $\lambda=dtdx$, $\xi(dtdx) $ (something.) 
+
+Shorthand notation:
+\begin{equation*}
+  e^{t\Delta }u = P_{t}u_{0}= \int_{\R^d } p(t,x-y)u_{0}(y)dy 
+\end{equation*}
+
+and we have a solution to the differential equation above given by the formula
+\begin{align*}
+  u(t,x)
+  &= \int_{\R^d }p(t,x-y) u_{0}(y)dy + \int_{\R^d }\int_{0}^{t}p(t-s,x-y)  \xi(dsdy)\\
+  & e^{t\Delta }u_{0} + \int_{\R^d }\int_{(-\infty,\infty)}p(t-s,x-y)\mathbf{1}_{\left[ s \geq 0\right] }\xi(dsdy)\\
+  & e^{t\Delta }u_{0} + p*(1_{+}\xi)(t,x)
+\end{align*}
+where $*$ denotes the spacetime convolution. This formula makes sense only for
+$d=1$, as the convolution term is well-defined in $L^{2}(\Omega)$ in that case.
+But for $d \geq 2$, this may not be the case. We will show this.
+
+\begin{align*}
+  \norm{p*(1_{+}\xi)}_{L^{2}(\Omega)}^{2}
+  &=\int_{\R^d }\int_{0}^{t}p(s,y)^{2}dsdy  
+\end{align*}
+The issue is that $p(s,y)$ may have an integrable singularity, and there's no
+guarantee of integrability if we square that. But observe that
+\begin{equation*}
+  \hat{p}(s,k) = e^{-s|k|^{2}}
+\end{equation*}
+and we note that the RHSis the characteristic function of a gaussian. By
+Parseval, we have
+\begin{align*}
+  \norm{p*(1_{+}\xi)}_{L^{2}(\Omega)}^{2}
+  &= \int_{0}^{t}\int_{\R^d }e^{-2s|k|^{2}}  dkds\\
+  &= \int_{0}^{t}\int_{\R^d }\frac{1-e^{-2s|k|^{2}}}{2|k|^{2}}  dkds
+\end{align*}
+Is this integrable? Well if $k$ is near zero, there is no problem, since there
+is no singularity at the origin. When $k\to\infty$, however, you are essentiall
+integrating $\frac{1}{|k|^{2}}$ over $\R^d$.  This is finite if $d=1$ and
+infinite if $d \geq 2$. This is called an 'ultraviolet problem' (think of $k$ as
+spectrum of light, and 'ultraviolet' means $k$ is large).
+
+
+\begin{theorem}[Kolmolgorov]
+  \label{thm:kolmolgorov}
+  For any complete metric space $(S,\rho)$ with $D\subseteq \R^n$. Suppose that
+  $\left\{X_{s}:s\in D\right\}$ is an $S$-valued process on some probability
+  space $\left( \Xi,\mathcal{F},P \right)$ such that
+  \begin{equation*}
+    \E\left[\rho(X_{s},X_{t})^{\beta} \right] \leq C \left| s-t \right|^{n+\alpha}
+  \end{equation*}
+  then $X$ has a continuous version $Y$. Moreover, $Y$ is $\gamma$-Holder
+  condtinuous whenever $0<\gamma<\alpha/\beta$. 
+\end{theorem}
+\begin{example}[Application of Kolmologorv Theorem to Brownian Motion]
+  For $n=1$ dimensional, $\R$-valued Brownian motion, we have $\alpha=1$ and
+  $\beta=4$.
+\end{example}
+Last time, we looked at the increments $\xi(t,x)-\xi(s,y)$  of white noise and showed that
+\begin{equation*}
+  \E\left[\left| \xi(t,x)-\xi(s,y) \right|
+    ^{p}\right] \leq C \left( \left| s-t \right|^{p/4}+\left| x-y \right|^{1/2}\right).
+\end{equation*}
+
+
+Now let's do some more stuff with white noise. We will consider the
+$d$-dimensional torus $T^{d}$, because things are always easier with finite
+domain. The Sobolov space $H^{s}(T^{d})$, $s \geq 0$,  is the functions
+satsfying
+\begin{equation*}
+  \norm{h}_{H^{s}}^{2} := \sum_{k\in \Z^{d}}\left( 1+|k|^{2} \right)^{s}|u_{k}|^{2}<\infty  
+\end{equation*}
+Observe that the term $\left( 1+|k|^{2} \right)^{s}$ makes the summands harder
+to integrate, and hence it follows that
+\begin{equation*}
+  H^{s}\subset L^{2}.
+\end{equation*}
+In particular, we define $H^{s}$ to be the closure of $L^{2}$ with respect to
+the norm defined above. We also have
+\begin{equation*}
+  \cdots \subset H^{2}\subset H^{1} \subset L^{2} = H^{0} \subset H^{1} \subset H^{2}\subset \cdots
+\end{equation*}
+Recall
+\begin{equation*}
+  \partial_{t}u = \Delta u+\xi
+\end{equation*}
+and
+\begin{equation*}
+  dX = AX+dB, \quad B=(B_{1},\ldots,B_{n})
+\end{equation*}
+Process in $\infty$-dimensional space. Cylindrical BM is the name for
+infinite-dimensional BM.
+\begin{equation} \label{eq:2}
+  B(t) = \sum_{k\in \Z^{d}}\beta_{k}(t)e_{k} 
+\end{equation}
+where $\beta_{k}$'s are independent Brownian motions.
+
+The interesting thing about this infinite dimensional BM given in \cref{eq:2} is
+that while it looks like an element of $L^{2}(T^{d})$, but it turns out not to be. To
+see this, observe that for any dimension $d$, we have
+\begin{align*}
+  \E\left[\norm{B(t)}_{L^{2}(T^{d})}^{2} \right]
+  &=\E\left[\sum_{k\in \Z^{d}}\beta_{k}(t)^{2}  \right]
+    &&\text{By Parseval}\\
+  &\sum_{k\in \Z^{d}}t = \infty.
+\end{align*}
+
+But it turns out there is a suitable larger space. Going through the above
+calculation but with the $H^{s}$  instead of the $L^{2}$ norm, we see that
+\begin{equation*}
+  \E\left[\norm{B(t)}_{H^{s}}^{2} \right] <\infty
+  \quad \text{ iff} \quad
+  s<-d/2
+\end{equation*}
+
+
+
+
+
+
+
+
 \end{document}
 
 \bibliographystyle{siam.bst}
